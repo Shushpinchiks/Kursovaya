@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Экспорт Данных</title>
+    <link rel="stylesheet" type="text/css" href="css/admin_panel.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Экспорт Данных</h1>
+        <a href="/admin_panel" class="back">Назад в Админ Панель</a>
+        <a href="/logout" class="logout">Выйти</a>
+    </div>
+
+    <div class="export-actions">
+        <button class="admin_panel" onclick="window.location.href='/export/csv/films'">Экспортировать в CSV</button>
+        <button class="admin_panel" onclick="window.location.href='/export/json/films'">Экспортировать в JSON</button>
+    </div>
+</div>
+</body>
+
+</html>

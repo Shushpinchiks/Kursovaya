@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Админ Панель</title>
+    <link rel="stylesheet" type="text/css" href="css/admin_panel.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Админ Панель</h1>
+        <a href="/logout" class="logout">Выйти</a>
+        <a href="/movies/page/1" class="back">Покинуть админ панель</a>
+    </div>
+
+    <div class="admin-actions">
+        <button class="admin_panel" onclick="window.location.href='/add-movie'">Добавить Фильм</button>
+        <button class="admin_panel" onclick="window.location.href='/delete-movie'">Удалить фильм</button>
+        <button class="admin_panel" onclick="window.location.href='/manage-users'">Управление Пользователями</button>
+        <button class="admin_panel" onclick="window.location.href='/export-data'">Выгрузить Данные</button>
+    </div>
+
+    <div class="admin_data">
+        <h2>Данные об администраторе</h2>
+        <p>Имя администратора: {{ .admin.Name }}</p>
+        <p>Почта администратора: {{ .admin.Email }}</p>
+    </div>
+
+</div>
+</body>
+
+</html>

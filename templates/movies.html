@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <title>Фильмы</title>
+    <link rel="stylesheet" type="text/css" href="/css/movies.css">
+</head>
+
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1 id="films">Фильмы</h1>
+        <a href="/favorites" class="favorites">Избранное</a>
+        <a href="/logout" class="logout">Выйти</a>
+
+        {{ if .Root}}
+        <div class="admin-button">
+            <a href="/admin_panel" class="admin_panel">Администрирование</a>
+        </div>
+        {{ end }}
+    </div>
+
+    <div class="content">
+        <div class="movies">
+            {{ range .Movies }}
+            <div class="movie" id="moviesList">
+
+                <a href="/movie/{{ .ID }}" class="film_one">
+                    <img src= "{{ .Poster }}" alt="{{ .Name }}">
+                </a>
+                <h2>{{ .Name }}</h2>
+
+                <div class="genres">
+                    {{ range .Genres }}
+                    <span class="genre">{{ .Name }}</span>
+                    {{ end }}
+                </div>
+
+                <span class="year">{{ .Year }}</span>
+            </div>
+            {{ end }}
+        </div>
+
+        <div class="genre-filter">
+            {{ range .AllGenres }}
+            <div>
+                <input type="checkbox" id="genre-{{ .ID }}" name="genre" value="{{ .Name }}">
+                <label for="genre-{{ .ID }}">{{ .Name }}</label>
+            </div>
+            {{ end }}
+        </div>
+
+    </div>
+
+    <div class="pagination">
+        {{ if .data.HasPrevPage }}
+        <a href="/movies/page/{{ .data.PrevPage }}{{ $.data.QueryString }}" class="page-link">&#9664</a>
+        {{ end }}
+
+        {{ range .data.Pages }}
+        <a href="/movies/page/{{ . }}{{ $.data.QueryString }}" class="page-link">{{ . }}</a>
+        {{ end }}
+
+        {{ if .data.HasNextPage }}
+        <a href="/movies/page/{{ .data.NextPage }}{{ $.data.QueryString }}" class="page-link">&#9654</a>
+        {{ end }}
+    </div>
+
+</div>
+
+<script>
+    // Функция для установки состояния чекбоксов на основе URL
+    function setCheckboxState() {
+        const params = new URLSearchParams(window.location.search);
+        const selectedGenres = params.getAll('genre');
+        document.querySelectorAll('input[name="genre"]').forEach((checkbox) => {
+            if (selectedGenres.includes(checkbox.value)) {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    document.querySelectorAll('input[name="genre"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', function() {
+            const selectedGenres = Array.from(document.querySelectorAll('input[name="genre"]:checked')).map(cb => cb.value);
+            const queryString = selectedGenres.map(genre => `genre=${encodeURIComponent(genre)}`).join('&');
+            const newUrl = `${window.location.pathname}?${queryString}`;
+
+            window.location.href = newUrl;
+        });
+    });
+
+    setCheckboxState();
+</script>
+
+</body>
+
+</html>

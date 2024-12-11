@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Избранные Фильмы</title>
+    <link rel="stylesheet" type="text/css" href="/css/favorites.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1 id="films">Избранное пользователя: {{ .user.Name }}</h1>
+        <a href="/movies/page/1" class="back">Вернуться</a>
+        <a href="/logout" class="logout">Выйти</a>
+    </div>
+
+    <div class="movies">
+        {{ range .Movies }}
+        <div class="movie" id="moviesList">
+
+            <a href="/movie/{{ .ID }}" class="film_one">
+                <img src= "{{ .Poster }}" alt="{{ .Name }}">
+            </a>
+            <h2>{{ .Name }}</h2>
+
+            <div class="genres">
+                {{ range .Genres }}
+                <span class="genre">{{ .Name }}</span>
+                {{ end }}
+            </div>
+
+            <span class="year">{{ .Year }}</span>
+        </div>
+        {{ end }}
+    </div>
+
+</div>
+
+</body>
+
+</html>

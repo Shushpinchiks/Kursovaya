@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Управление Пользователями</title>
+    <link rel="stylesheet" type="text/css" href="css/admin_panel.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Управление Пользователями</h1>
+        <a href="/admin_panel" class="back">Назад в Админ Панель</a>
+        <a href="/logout" class="logout">Выйти</a>
+    </div>
+
+    <table class="user-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{ range .users }}
+        {{ if eq .Root "0"}}
+        <tr>
+            <td>{{ .ID }}</td>
+            <td>{{ .Name }}</td>
+            <td>{{ .Email }}</td>
+            <td>
+                <button class="delete-button" onclick="deleteUser( {{ .ID }} )">Удалить</button>
+            </td>
+        </tr>
+        {{ end }}
+        {{ end }}
+        </tbody>
+    </table>
+</div>
+<script src="js/delete_user.js"></script>
+
+</body>
+</html>

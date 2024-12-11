@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <title>Фильм</title>
+    <link rel="stylesheet" type="text/css" href="css/film_one.css">
+</head>
+
+<body>
+<div class="container">
+
+    <div class="header">
+        <a href="/favorites" class="favorites">Избранное</a>
+        <a href="/movies/page/1" class="back">Вернуться</a>
+        <a href="/logout" class="logout">Выйти</a>
+    </div>
+
+    <div class="single-movie">
+        <div class="poster">
+            <img src="{{ .film.Poster }}" alt="{{ .film.Name }}">
+        </div>
+        <div class="details-block">
+            <div class="details">
+                <h2>{{ .film.Name }}
+
+                    <div class="genres">
+                        {{ range .film.Genres }}
+                        <span class="genre">{{ .Name }}</span>
+                        {{ end }}
+                    </div>
+
+                    <p class="year">Год выпуска: {{ .film.Year }}</p>
+                    <p class="director">Режиссёр: {{ .film.Director }}</p>
+                </h2>
+                <h3>Описание
+                    <p class="description" id="description-{{ .film.ID }}">{{ .film.Description }}</p>
+                </h3>
+                <button onclick="addToFavorites('{{ .film.ID }}')" class="add-to-favorites">Добавить в избранное</button>
+                <div class="rating-display">
+                    <p>Рейтинг: <span class="rating-value">{{ .rating }}</span></p>
+                </div>
+            </div>
+
+            <p class="expand" id="expand-{{ .film.ID }}" onclick="expandDescription('{{ .film.ID }}')"
+               style="display: none;">Развернуть</p>
+
+            <div class="rating">
+                {{ if not .userHasRated }}
+                <span class="star" data-value="5" data-film-id="{{ .film.ID }}">&#9733;</span>
+                <span class="star" data-value="4" data-film-id="{{ .film.ID }}">&#9733;</span>
+                <span class="star" data-value="3" data-film-id="{{ .film.ID }}">&#9733;</span>
+                <span class="star" data-value="2" data-film-id="{{ .film.ID }}">&#9733;</span>
+                <span class="star" data-value="1" data-film-id="{{ .film.ID }}">&#9733;</span>
+                {{ else }}
+                <p>Вы уже оценили этот фильм.</p>
+                {{ end }}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="add-review">
+        <h3>Добавить рецензию</h3>
+        <form action="/movie/{{ .film.ID }}" method="post">
+            <textarea name="review" rows="15" cols="140" placeholder="Напишите вашу рецензию..."></textarea>
+            <button type="submit">Опубликовать/Изменить</button>
+        </form>
+    </div>
+
+    <div class="reviews">
+        <h3>Рецензии пользователей</h3>
+        <div class="review-list">
+            {{ range .film.Reviews }}
+            <div class="review">
+                <p class="review-author">Пользователь: {{ .User.Name }}</p>
+                <p class="review-content">{{ .Text }}</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+
+</div>
+<script>
+    function expandDescription(filmId) {
+        const descriptionElement = document.getElementById(`description-${filmId}`);
+        const expandElement = document.getElementById(`expand-${filmId}`);
+
+        descriptionElement.style.maxHeight = 'none';
+        expandElement.style.display = 'block';
+    }
+
+    function addToFavorites(filmId) {
+        fetch(`/favorites/add/${filmId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({filmId: filmId})
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Фильм добавлен в избранное!');
+                } else {
+                    alert('Ошибка при добавлении фильма в избранное.');
+                }
+            })
+            .catch(error => console.error('Ошибка:', error));
+    }
+</script>
+</body>
+<script src="js/stars.js"></script>
+</html>

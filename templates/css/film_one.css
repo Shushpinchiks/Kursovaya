@@ -1,0 +1,252 @@
+body {
+    font-family: sans-serif;
+    background: #f3f3f3;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.header h1 {
+    color: #4CAF50;
+}
+
+.logout {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.favorites {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.back {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+.single-movie {
+    display: flex;
+    gap: 30px;
+    padding-top: 40px;
+}
+
+.poster img {
+    width: 300px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.details-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: calc(100% - 330px);
+    position: relative;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.year {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.director {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.description {
+    line-height: 1.6;
+    color: #3e3e3e;
+    font-size: 16px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: justify;
+    overflow: hidden;
+    max-height: 200px;
+    position: relative;
+}
+
+.expand {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.genre {
+    background-color: #e0e0e0;
+    color: #3e3e3e;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.rating-display {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+}
+
+.rating-value {
+    font-weight: bold;
+    font-size: 24px;
+    color: #d5b544;
+}
+
+.reviews {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.reviews h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review {
+    background-color: #e0f7e0; /* Зеленоватый фон */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #c8e6c9; /* Легкая граница для контраста */
+}
+
+.review-author {
+    font-weight: bold;
+    border: 1px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: #2e7d32; /* Темно-зеленый цвет для имени пользователя */
+}
+
+.review-content {
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: justify;
+    color: #3e3e3e; /* Цвет текста рецензии */
+}
+
+.add-review {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.add-review h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.add-review textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.add-review button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-favorites {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e47a7a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 24px;
+    color: #ccc; /* Цвет неактивной звезды */
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: #ffcc00; /* Цвет активной звезды при наведении */
+}
+
+.star.selected {
+    color: #ffcc00;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Добавить Фильм</title>
+    <link rel="stylesheet" type="text/css" href="css/admin_panel.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Добавить Фильм</h1>
+        <a href="/admin_panel" class="back">Назад в Админ Панель</a>
+        <a href="/logout" class="logout">Выйти</a>
+    </div>
+
+    <form action="/add-movie" method="POST" class="add-movie-form">
+        <div class="form-group">
+            <label for="name">Имя фильма:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="director">Режиссёр:</label>
+            <input type="text" id="director" name="director" required>
+        </div>
+
+        <div class="form-group">
+            <label for="poster">Постер (имя файла):</label>
+            <input type="text" id="poster" name="poster" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год выпуска:</label>
+            <input type="text" id="year" name="year" required>
+        </div>
+
+        <div class="form-group">
+            <label for="genres">Жанры (через запятую):</label>
+            <input type="text" id="genres" name="genres">
+        </div>
+
+        <button type="submit" class="submit-button">Добавить Фильм</button>
+    </form>
+</div>
+</body>
+
+</html>
