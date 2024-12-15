@@ -41,7 +41,7 @@ func Init() *gorm.DB {
 	return db
 }
 
-func backupDatabase() error {
+func backupDatabase() (string, error) {
 	var cfg Config = Config{
 		host:     os.Getenv("DB_HOST"),
 		user:     os.Getenv("DB_USER"),
@@ -50,20 +50,16 @@ func backupDatabase() error {
 		port:     os.Getenv("DB_PORT"),
 		sslmode:  " sslmode=disable",
 	}
-	// Укажите путь для сохранения бэкапа
 	backupFile := fmt.Sprintf("backup_%s.sql", time.Now().Format("20060102_150405"))
 
-	// Формируем команду для выполнения pg_dump
 	cmd := exec.Command("pg_dump", "-h", cfg.host, "-p", cfg.port, "-U", cfg.user, "-F", "c", "-b", "-v", "-f", backupFile, cfg.dbname)
 
-	// Устанавливаем переменную окружения для пароля
 	cmd.Env = append(cmd.Env, fmt.Sprintf("PGPASSWORD=%s", cfg.password))
 
-	// Выполняем команду
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("ошибка выполнения pg_dump: %v, вывод: %s", err, string(output))
+		return backupFile, fmt.Errorf("ошибка выполнения pg_dump: %v, вывод: %s", err, string(output))
 	}
 
-	return nil
+	return backupFile, nil
 }

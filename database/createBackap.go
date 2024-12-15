@@ -82,21 +82,20 @@ func getUploadURL(filePath, token string) (string, error) {
 }
 
 func TimeBackup() {
-	backupTime := "02:00"
+	backupTime := "22:19"
 
 	for {
 		now := time.Now()
 		currentTime := now.Format("15:04")
 
 		if currentTime == backupTime {
-			err := backupDatabase()
+			file, err := backupDatabase()
 			if err != nil {
 				fmt.Println("Ошибка при создании бэкапа:", err)
 			} else {
 				fmt.Println("Бэкап успешно создан")
-				backupFile := fmt.Sprintf("backup_%s.sql", time.Now().Format("20060102_150405"))
 
-				err := uploadToYandexDisk(backupFile, token)
+				err := uploadToYandexDisk(file, token)
 				if err != nil {
 					fmt.Println("Ошибка загрузки на Яндекс.Диск:", err)
 				} else {
