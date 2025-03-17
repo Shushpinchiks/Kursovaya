@@ -6,10 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 )
 
-var token = "y0_AgAAAABXQurmAAzvqgAAAAEb2rGcAACWPV3aAQhEeKysYyd79ROp6ilhHA"
+var token = os.Getenv("TOKEN")
 
 func uploadToYandexDisk(filePath, token string) error {
 	// Получаем URL для загрузки
